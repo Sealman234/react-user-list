@@ -1,38 +1,24 @@
 import React, { useState } from 'react';
 
-import Form from './components/Form/Form';
-import Card from './components/User/Card';
+import AddUser from './components/Users/AddUser';
+import UsersList from './components/Users/UsersList';
 
 function App() {
-  const [userList, setUserList] = useState([]);
+  const [usersList, setUsersList] = useState([]);
 
-  const userListHandler = (data) => {
-    setUserList((prev) => {
-      return [data, ...prev];
+  const addUserHandler = (uName, uAge) => {
+    setUsersList((prevUsersList) => {
+      return [
+        ...prevUsersList,
+        { name: uName, age: uAge, id: Math.random().toString() },
+      ];
     });
-  };
-
-  const userDeleteHandler = (val) => {
-    console.log('deleted!', val);
-    const arr = userList.filter((item) => {
-      return item.age !== val;
-    });
-    setUserList(arr);
   };
 
   return (
     <div>
-      <Form onUserListHandler={userListHandler} />
-      {userList.map((user) => {
-        return (
-          <Card
-            key={user.age}
-            username={user.username}
-            age={user.age}
-            onUserDelete={userDeleteHandler}
-          />
-        );
-      })}
+      <AddUser onAddUser={addUserHandler} />
+      <UsersList users={usersList} />
     </div>
   );
 }
