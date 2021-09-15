@@ -6,13 +6,9 @@ import classes from './ErrorModal.module.css';
 
 const ErrorModal = (props) => {
   return (
-    <div className={classes.backdrop} onClick={props.onConfirm}>
-      <Card
-        className={classes.modal}
-        onClick={(event) => {
-          event.stopPropagation();
-        }}
-      >
+    <div>
+      <div className={classes.backdrop} onClick={props.onConfirm}></div>
+      <Card className={classes.modal}>
         <header className={classes.header}>
           <h2>{props.title}</h2>
         </header>
